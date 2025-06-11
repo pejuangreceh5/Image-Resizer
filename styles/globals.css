@@ -2,6 +2,30 @@
 @tailwind components;
 @tailwind utilities;
 
-html, body {
-  min-height: 100vh;
+/* Tambahan styling agar mirip Play Store */
+body {
+  font-family: 'Roboto', Arial, sans-serif;
+  background: #f6f6f6;
+}
+
+h1, h2, h3 {
+  font-family: 'Roboto', Arial, sans-serif;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  background: #e0e0e0;
+}
+::-webkit-scrollbar-thumb {
+  background: #bdbdbd;
+  border-radius: 2px;
+}
+
+/* Untuk animasi fade-in */
+.animate-fade-in {
+  animation: fadeIn .7s;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px);}
+  to { opacity: 1; transform: none;}
 }
