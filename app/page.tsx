@@ -10,9 +10,7 @@ export default function Home() {
           <h1 className="text-white text-2xl font-bold tracking-tight drop-shadow">Image Compressor & Resizer</h1>
         </div>
       </header>
-      {/* CARD */}
       <ImageCompressor />
-      {/* FOOTER */}
       <footer className="fixed bottom-0 left-0 w-full flex justify-center py-4 bg-white/95 border-t border-gray-100 text-gray-500 text-xs font-medium tracking-wide rounded-t-2xl">
         © {new Date().getFullYear()} Image Compressor
       </footer>
