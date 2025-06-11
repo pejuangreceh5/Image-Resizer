@@ -1,4 +1,4 @@
-import ImageCompressor from "@/components/ImageCompressor";
+import ImageCompressor from "../components/ImageCompressor";
 
 export default function Home() {
   return (
