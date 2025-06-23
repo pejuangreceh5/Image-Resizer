@@ -11,6 +11,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="id">
       <head>
         <link rel="icon" href="/logo.svg" />
+        <meta name="google-site-verification" content="cadTnD0tiC7zartGuwagZwH4ECWViLkMuXsnoyn9dLc" />
       </head>
       <body>{children}</body>
     </html>
