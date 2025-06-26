@@ -20,7 +20,7 @@ export default function Home() {
     const reader = new FileReader();
     reader.readAsDataURL(image);
     reader.onload = (event) => {
-      const img = document.createElement("img"); // ✅ fix: replace new Image()
+      const img = document.createElement("img"); // ✅ fix for TypeScript
       img.src = event.target?.result as string;
       img.onload = () => {
         const canvas = document.createElement("canvas");
@@ -37,52 +37,72 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen p-4 flex flex-col items-center justify-center gap-4 bg-gray-100">
-      <h1 className="text-2xl font-bold text-center">Image Resizer Online</h1>
+    <div style={{ fontFamily: "sans-serif", textAlign: "center", padding: "20px" }}>
+      <h1 style={{ fontSize: "24px", fontWeight: "bold" }}>Image Resizer</h1>
 
-      <input type="file" accept="image/*" onChange={handleImageChange} />
+      <input
+        type="file"
+        accept="image/*"
+        onChange={handleImageChange}
+        style={{ margin: "10px 0" }}
+      />
 
-      <div className="flex gap-4">
+      <div style={{ marginBottom: "10px" }}>
         <label>
           Width:
           <input
             type="number"
             value={width}
             onChange={(e) => setWidth(Number(e.target.value))}
-            className="border rounded p-1 ml-2 w-24"
+            style={{ marginLeft: "8px", padding: "4px", width: "80px" }}
           />
         </label>
+      </div>
+
+      <div style={{ marginBottom: "10px" }}>
         <label>
           Height:
           <input
             type="number"
             value={height}
             onChange={(e) => setHeight(Number(e.target.value))}
-            className="border rounded p-1 ml-2 w-24"
+            style={{ marginLeft: "8px", padding: "4px", width: "80px" }}
           />
         </label>
       </div>
 
       <button
         onClick={handleResize}
-        className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+        style={{
+          backgroundColor: "#2563EB",
+          color: "#fff",
+          padding: "10px 20px",
+          border: "none",
+          borderRadius: "6px",
+          cursor: "pointer",
+        }}
       >
         Resize Image
       </button>
 
       {resizedImage && (
-        <div className="mt-4 text-center">
-          <h2 className="text-lg font-semibold mb-2">Resized Image</h2>
-          <img src={resizedImage} alt="Resized" className="mx-auto" />
+        <div style={{ marginTop: "20px" }}>
+          <h2 style={{ fontSize: "18px", fontWeight: "bold" }}>Resized Image</h2>
+          <img
+            src={resizedImage}
+            alt="Resized"
+            style={{ margin: "10px 0", maxWidth: "100%" }}
+          />
+          <br />
           <a
             href={resizedImage}
             download="resized-image.jpg"
-            className="block mt-2 text-blue-600 underline"
+            style={{ color: "#2563EB", textDecoration: "underline" }}
           >
             Download
           </a>
         </div>
       )}
-    </main>
+    </div>
   );
-          }
+}
