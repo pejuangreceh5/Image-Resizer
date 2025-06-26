@@ -1,108 +1,23 @@
-"use client";
-
-import { useState } from "react";
+import dynamic from "next/dynamic";
+const ImageCompressor = dynamic(() => import("../components/ImageCompressor"), { ssr: false });
 
 export default function Home() {
-  const [image, setImage] = useState<File | null>(null);
-  const [resizedImage, setResizedImage] = useState<string | null>(null);
-  const [width, setWidth] = useState<number>(300);
-  const [height, setHeight] = useState<number>(300);
-
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      setImage(e.target.files[0]);
-    }
-  };
-
-  const handleResize = () => {
-    if (!image) return;
-
-    const reader = new FileReader();
-    reader.readAsDataURL(image);
-    reader.onload = (event) => {
-      const img = document.createElement("img"); // ✅ fix for TypeScript
-      img.src = event.target?.result as string;
-      img.onload = () => {
-        const canvas = document.createElement("canvas");
-        canvas.width = width;
-        canvas.height = height;
-        const ctx = canvas.getContext("2d");
-        if (ctx) {
-          ctx.drawImage(img, 0, 0, width, height);
-          const resizedDataUrl = canvas.toDataURL("image/jpeg");
-          setResizedImage(resizedDataUrl);
-        }
-      };
-    };
-  };
-
   return (
-    <div style={{ fontFamily: "sans-serif", textAlign: "center", padding: "20px" }}>
-      <h1 style={{ fontSize: "24px", fontWeight: "bold" }}>Image Resizer</h1>
-
-      <input
-        type="file"
-        accept="image/*"
-        onChange={handleImageChange}
-        style={{ margin: "10px 0" }}
-      />
-
-      <div style={{ marginBottom: "10px" }}>
-        <label>
-          Width:
-          <input
-            type="number"
-            value={width}
-            onChange={(e) => setWidth(Number(e.target.value))}
-            style={{ marginLeft: "8px", padding: "4px", width: "80px" }}
-          />
-        </label>
-      </div>
-
-      <div style={{ marginBottom: "10px" }}>
-        <label>
-          Height:
-          <input
-            type="number"
-            value={height}
-            onChange={(e) => setHeight(Number(e.target.value))}
-            style={{ marginLeft: "8px", padding: "4px", width: "80px" }}
-          />
-        </label>
-      </div>
-
-      <button
-        onClick={handleResize}
-        style={{
-          backgroundColor: "#2563EB",
-          color: "#fff",
-          padding: "10px 20px",
-          border: "none",
-          borderRadius: "6px",
-          cursor: "pointer",
-        }}
-      >
-        Resize Image
-      </button>
-
-      {resizedImage && (
-        <div style={{ marginTop: "20px" }}>
-          <h2 style={{ fontSize: "18px", fontWeight: "bold" }}>Resized Image</h2>
-          <img
-            src={resizedImage}
-            alt="Resized"
-            style={{ margin: "10px 0", maxWidth: "100%" }}
-          />
-          <br />
-          <a
-            href={resizedImage}
-            download="resized-image.jpg"
-            style={{ color: "#2563EB", textDecoration: "underline" }}
-          >
-            Download
-          </a>
+    <div className="min-h-screen flex flex-col items-center pt-6 pb-16 bg-[#f6f6f6] dark:bg-gray-950 transition-colors">
+      <header className="w-full max-w-2xl mx-auto flex items-center gap-3 p-4 bg-gradient-to-r from-green-500 to-blue-500 rounded-2xl shadow-xl mb-6 animate-fade-in">
+        <span className="text-4xl">🖼️</span>
+        <div>
+          <h1 className="text-white text-2xl font-bold tracking-tight drop-shadow">
+            Image Compressor & Resizer
+          </h1>
         </div>
-      )}
+      </header>
+
+      <ImageCompressor />
+
+      <footer className="fixed bottom-0 left-0 w-full flex justify-center py-4 bg-white/95 dark:bg-gray-900/95 border-t border-gray-100 dark:border-gray-700 text-gray-500 dark:text-gray-400 text-xs font-medium tracking-wide rounded-t-2xl transition-colors">
+        © {new Date().getFullYear()} Image Compressor
+      </footer>
     </div>
   );
 }
