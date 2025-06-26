@@ -4,6 +4,9 @@ import type { ReactNode } from "react";
 export const metadata = {
   title: "Image Compressor & Resizer",
   description: "Kompres dan resize gambar langsung di browser, tanpa backend.",
+  verification: {
+    google: "cadTnD0tiC7zartGuwagZwH4ECWViLkMuXsnoyn9dLc",
+  },
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
