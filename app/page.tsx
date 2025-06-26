@@ -1,21 +1,89 @@
-import dynamic from "next/dynamic";
-
-const ImageCompressor = dynamic(() => import("../components/ImageCompressor"), { ssr: false });
+'use client';
+import Image from 'next/image';
+import { useState } from 'react';
 
 export default function Home() {
+  const [selectedImage, setSelectedImage] = useState<File | null>(null);
+  const [compressedImage, setCompressedImage] = useState<string | null>(null);
+
+  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      setSelectedImage(file);
+      compressImage(file);
+    }
+  };
+
+  const compressImage = (file: File) => {
+    const reader = new FileReader();
+    reader.onload = (event: ProgressEvent<FileReader>) => {
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        const MAX_WIDTH = 800;
+        const scaleSize = MAX_WIDTH / img.width;
+        canvas.width = MAX_WIDTH;
+        canvas.height = img.height * scaleSize;
+        const ctx = canvas.getContext('2d');
+        ctx?.drawImage(img, 0, 0, canvas.width, canvas.height);
+        const compressedDataUrl = canvas.toDataURL('image/jpeg', 0.7);
+        setCompressedImage(compressedDataUrl);
+      };
+      if (event.target?.result) {
+        img.src = event.target.result as string;
+      }
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const downloadImage = () => {
+    if (compressedImage) {
+      const a = document.createElement('a');
+      a.href = compressedImage;
+      a.download = 'compressed.jpg';
+      a.click();
+    }
+  };
+
   return (
-    <div className="min-h-screen flex flex-col items-center pt-6 pb-16 bg-[#f6f6f6] dark:bg-gray-950 transition-colors">
-      {/* HEADER */}
-      <header className="w-full max-w-2xl mx-auto flex items-center gap-3 p-4 bg-gradient-to-r from-green-500 to-blue-500 rounded-2xl shadow-xl mb-6 animate-fade-in">
-        <span className="text-4xl">🖼️</span>
-        <div>
-          <h1 className="text-white text-2xl font-bold tracking-tight drop-shadow">Image Compressor & Resizer</h1>
+    <main className="min-h-screen p-8 bg-gray-100 text-center">
+      <h1 className="text-3xl font-bold mb-6">Image Compressor & Resizer</h1>
+      <input
+        type="file"
+        accept="image/*"
+        onChange={handleImageChange}
+        className="mb-4"
+      />
+      {selectedImage && (
+        <div className="mb-4">
+          <h2 className="font-semibold">Original:</h2>
+          <Image
+            src={URL.createObjectURL(selectedImage)}
+            alt="Original"
+            width={300}
+            height={300}
+            className="mx-auto my-2"
+          />
         </div>
-      </header>
-      <ImageCompressor />
-      <footer className="fixed bottom-0 left-0 w-full flex justify-center py-4 bg-white/95 dark:bg-gray-900/95 border-t border-gray-100 dark:border-gray-700 text-gray-500 dark:text-gray-400 text-xs font-medium tracking-wide rounded-t-2xl transition-colors">
-        © {new Date().getFullYear()} Image Compressor
-      </footer>
-    </div>
+      )}
+      {compressedImage && (
+        <div>
+          <h2 className="font-semibold">Compressed:</h2>
+          <Image
+            src={compressedImage}
+            alt="Compressed"
+            width={300}
+            height={300}
+            className="mx-auto my-2"
+          />
+          <button
+            onClick={downloadImage}
+            className="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+          >
+            Download Compressed Image
+          </button>
+        </div>
+      )}
+    </main>
   );
-}
+    }
