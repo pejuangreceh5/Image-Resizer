@@ -1,55 +1,65 @@
-import Head from "next/head";
 import ImageCompressor from "@/components/ImageCompressor";
 
-export default function HomePage() {
+export const metadata = {
+  title: "Image Compressor & Resizer Online Gratis",
+  description:
+    "Kompres dan resize gambar JPG, PNG, WebP secara online langsung di browser. Cepat, gratis, dan tanpa watermark.",
+};
+
+export default function Page() {
   return (
-    <>
-      <Head>
-        <title>Resize & Kompres Gambar Online Gratis | JPG PNG WebP</title>
-        <meta name="description" content="Ubah ukuran & kompres gambar secara online tanpa install aplikasi. Mendukung JPG, PNG, WebP. Gratis & cepat langsung dari browser!" />
-        <meta name="keywords" content="kompres gambar, resize gambar, kompres jpg, kompres png, kompres webp, ubah ukuran gambar, tool kompres online" />
-        <meta name="author" content="ImageResizerOnline" />
-        <meta name="robots" content="index, follow" />
+    <main className="min-h-screen flex flex-col items-center pt-6 pb-16 bg-[#f6f6f6] dark:bg-gray-950 transition-colors">
+      <header className="w-full max-w-2xl mx-auto flex items-center gap-3 p-4 bg-gradient-to-r from-green-500 to-blue-500 rounded-2xl shadow-xl mb-6 animate-fade-in">
+        <span className="text-4xl">🖼️</span>
+        <div>
+          <h1 className="text-white text-2xl font-bold tracking-tight drop-shadow">
+            Image Compressor & Resizer
+          </h1>
+        </div>
+      </header>
 
-        {/* Open Graph for social media */}
-        <meta property="og:title" content="Resize & Kompres Gambar Online Gratis" />
-        <meta property="og:description" content="Tool gratis untuk ubah ukuran & kompres gambar seperti JPG, PNG, dan WebP langsung di browser." />
-        <meta property="og:url" content="https://imageresizeronline.vercel.app/" />
-        <meta property="og:type" content="website" />
-        <meta property="og:image" content="https://imageresizeronline.vercel.app/logo.svg" />
-
-        {/* Twitter Card */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Resize & Kompres Gambar Online Gratis" />
-        <meta name="twitter:description" content="Tool gratis ubah ukuran & kompres gambar online seperti JPG, PNG, WebP." />
-        <meta name="twitter:image" content="https://imageresizeronline.vercel.app/logo.svg" />
-
-        {/* Optional: Structured Data */}
-        <script type="application/ld+json" dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "WebSite",
-            "name": "Image Resizer Online",
-            "url": "https://imageresizeronline.vercel.app",
-            "potentialAction": {
-              "@type": "SearchAction",
-              "target": "https://imageresizeronline.vercel.app?q={search_term_string}",
-              "query-input": "required name=search_term_string"
-            }
-          })
-        }} />
-      </Head>
-
-      {/* Tool Component */}
-      <main className="flex flex-col items-center justify-center px-4 py-8">
-        <h1 className="text-3xl font-bold text-center mb-6 max-w-lg leading-tight">
-          Resize & Kompres Gambar Online Gratis
-        </h1>
-        <p className="text-center text-gray-600 max-w-xl mb-10">
-          Gunakan alat online kami untuk mengubah ukuran dan mengompres gambar seperti JPG, PNG, dan WebP. Tidak perlu install aplikasi, semua langsung di browser.
+      {/* Konten SEO statis */}
+      <section className="prose dark:prose-invert max-w-2xl px-4 mb-10 animate-fade-in">
+        <h1>Image Compressor & Resizer Online Gratis</h1>
+        <p>
+          Selamat datang di alat kompres dan resize gambar gratis berbasis web.
+          Aplikasi ini membantu Anda mengurangi ukuran file gambar secara instan
+          tanpa mengorbankan kualitas visual.
         </p>
-        <ImageCompressor />
-      </main>
-    </>
+        <h2>Fitur Unggulan</h2>
+        <ul>
+          <li>Mendukung format JPG, PNG, dan WebP</li>
+          <li>Resize otomatis atau manual</li>
+          <li>Crop gambar sebelum resize</li>
+          <li>Mode gelap dan terang</li>
+          <li>Gratis tanpa watermark</li>
+        </ul>
+        <h2>Kenapa Kompresi Gambar Penting?</h2>
+        <p>
+          Gambar berukuran besar memperlambat loading website dan menguras
+          bandwidth. Dengan mengompres gambar, Anda bisa mempercepat akses,
+          menghemat ruang penyimpanan, dan memperbaiki performa SEO website Anda.
+        </p>
+        <h2>Cara Menggunakan</h2>
+        <ol>
+          <li>Pilih gambar dari perangkat Anda atau drag & drop</li>
+          <li>Crop (jika perlu), atur ukuran dan kualitas</li>
+          <li>Klik "Kompres / Resize"</li>
+          <li>Download gambar hasil kompresi</li>
+        </ol>
+        <h2>Privasi Terjamin</h2>
+        <p>
+          Semua proses dilakukan langsung di browser Anda tanpa upload ke server.
+          Data gambar Anda tetap aman dan privat.
+        </p>
+      </section>
+
+      {/* Komponen utama aplikasi */}
+      <ImageCompressor />
+
+      <footer className="fixed bottom-0 left-0 w-full flex justify-center py-4 bg-white/95 dark:bg-gray-900/95 border-t border-gray-100 dark:border-gray-700 text-gray-500 dark:text-gray-400 text-xs font-medium tracking-wide rounded-t-2xl transition-colors">
+        © 2025 Image Compressor
+      </footer>
+    </main>
   );
 }
