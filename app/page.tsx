@@ -1,23 +1,56 @@
-import dynamic from "next/dynamic";
-const ImageCompressor = dynamic(() => import("../components/ImageCompressor"), { ssr: false });
+"use client";
+import Head from "next/head";
+import ImageCompressor from "@/components/ImageCompressor";
 
-export default function Home() {
+export default function HomePage() {
   return (
-    <div className="min-h-screen flex flex-col items-center pt-6 pb-16 bg-[#f6f6f6] dark:bg-gray-950 transition-colors">
-      <header className="w-full max-w-2xl mx-auto flex items-center gap-3 p-4 bg-gradient-to-r from-green-500 to-blue-500 rounded-2xl shadow-xl mb-6 animate-fade-in">
-        <span className="text-4xl">🖼️</span>
-        <div>
-          <h1 className="text-white text-2xl font-bold tracking-tight drop-shadow">
-            Image Compressor & Resizer
+    <>
+      <Head>
+        <title>Image Resizer & Compressor Online - Gratis & Cepat</title>
+        <meta
+          name="description"
+          content="Resize dan kompres gambar JPG, PNG, dan WebP secara online tanpa aplikasi. Gratis, cepat, dan mudah digunakan."
+        />
+        <meta
+          name="keywords"
+          content="image resizer online, image compressor, kompres gambar, ubah ukuran jpg png webp"
+        />
+        <meta name="robots" content="index, follow" />
+        <meta property="og:title" content="Image Resizer & Compressor Online" />
+        <meta
+          property="og:description"
+          content="Alat gratis untuk resize dan kompres gambar langsung di browser."
+        />
+        <meta
+          property="og:url"
+          content="https://imageresizeronline.vercel.app/"
+        />
+        <meta
+          property="og:image"
+          content="https://imageresizeronline.vercel.app/logo.svg"
+        />
+        <link
+          rel="canonical"
+          href="https://imageresizeronline.vercel.app/"
+        />
+      </Head>
+
+      <main className="min-h-screen flex flex-col items-center justify-start p-6 bg-gray-50 text-gray-800">
+        <header className="max-w-xl w-full text-center mb-8">
+          <h1 className="text-3xl font-bold mb-2">
+            Resize & Kompres Gambar Online Gratis
           </h1>
-        </div>
-      </header>
+          <p className="text-gray-600">
+            Gunakan alat online kami untuk mengubah ukuran dan mengompres gambar seperti JPG, PNG, dan WebP. Tidak perlu install aplikasi, semua langsung di browser.
+          </p>
+        </header>
 
-      <ImageCompressor />
+        <ImageCompressor />
 
-      <footer className="fixed bottom-0 left-0 w-full flex justify-center py-4 bg-white/95 dark:bg-gray-900/95 border-t border-gray-100 dark:border-gray-700 text-gray-500 dark:text-gray-400 text-xs font-medium tracking-wide rounded-t-2xl transition-colors">
-        © {new Date().getFullYear()} Image Compressor
-      </footer>
-    </div>
+        <footer className="mt-16 text-sm text-gray-500 text-center">
+          &copy; 2025 Image Resizer Online - Dibuat untuk pengguna yang butuh alat kompres dan resize cepat.
+        </footer>
+      </main>
+    </>
   );
 }
