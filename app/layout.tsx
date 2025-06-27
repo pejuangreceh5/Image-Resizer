@@ -10,13 +10,22 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="id">
       <head>
-        <link rel="icon" href="/logo.svg" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/logo.svg" />
         <meta name="google-site-verification" content="cadTnD0tiC7zartGuwagZwH4ECWViLkMuXsnoyn9dLc" />
         <meta name="description" content="Kompres dan resize gambar langsung di browser, tanpa backend." />
-        <title>Image Compressor & Resizer</title>
 
-        {/* Schema JSON-LD */}
+        {/* Script untuk pastikan dark mode tidak aktif secara default */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              document.documentElement.classList.remove('dark');
+              document.body.classList.remove('dark');
+            `,
+          }}
+        />
+
+        {/* JSON-LD schema */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -37,9 +46,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           }}
         />
       </head>
-      <body className="bg-white text-gray-900 transition-colors">
-        {children}
-      </body>
+      <body className="bg-white text-gray-900">{children}</body>
     </html>
   );
 }
