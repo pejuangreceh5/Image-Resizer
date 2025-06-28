@@ -57,6 +57,13 @@ export default function Page() {
       {/* Komponen utama aplikasi */}
       <ImageCompressor />
 
+      {/* Navigasi tambahan */}
+      <div className="text-center mt-8 text-sm text-gray-500">
+        <a href="/about" className="mx-2 hover:underline">Tentang</a>
+        <a href="/faq" className="mx-2 hover:underline">FAQ</a>
+        <a href="/privacy" className="mx-2 hover:underline">Privasi</a>
+      </div>
+
       <footer className="fixed bottom-0 left-0 w-full flex justify-center py-4 bg-white/95 dark:bg-gray-900/95 border-t border-gray-100 dark:border-gray-700 text-gray-500 dark:text-gray-400 text-xs font-medium tracking-wide rounded-t-2xl transition-colors">
         © 2025 Image Compressor
       </footer>
