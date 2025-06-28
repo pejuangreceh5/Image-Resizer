@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://imageresizeronline.vercel.app/sitemap.xml
