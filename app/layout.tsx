@@ -43,7 +43,16 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           }}
         />
       </head>
-      <body className="bg-white text-gray-900">{children}</body>
+      <body className="bg-white text-gray-900">
+        {children}
+
+        {/* Adsterra Popunder Script */}
+        <script
+          async
+          type="text/javascript"
+          src="//pl27008569.profitableratecpm.com/71/78/7b/71787be7062c7e38867e259dc30b7be8.js"
+        ></script>
+      </body>
     </html>
   );
-}
+              }
